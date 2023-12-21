@@ -43,7 +43,7 @@ def start(client, message):
 
 @App.on_callback_query()
 def start(client, query):
-    if query['data'] == 'menu':
+    if query.data == 'menu':
         App.send_message(query.from_user.username, 'Selection function', reply_markup=ReplyKeyboardMarkup(
             [
                 ["/my_collection", "/my_balance", "/my_bids"],
