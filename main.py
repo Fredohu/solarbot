@@ -51,12 +51,16 @@ def start(client, query):
             ],
             resize_keyboard=True  # Make the keyboard smaller
         ))
-    elif query['data'] == 'registration':
+    elif query.data == 'registration':
         back.users_profile[query.from_user.username]['reg_flag'] = True
         back.users_profile[query.from_user.username]['func_data'] = 'registration'
         App.send_message(query.from_user.username, 'Please input public key')
-    elif query['data'] == 'bind':
-        back.bind(query['data']['binder'],query['data']['holder'], query['data']['token_address'])
+    elif query.data == 'bind':
+        # Access the relevant data using the 'query' object
+        binder = query.data.get('binder')
+        holder = query.data.get('holder')
+        token_address = query.data.get('token_address')
+        back.bind(binder, holder, token_address)
 
 @App.on_message(filters.command('my_balance'))
 def raw(client, message):
