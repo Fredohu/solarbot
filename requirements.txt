@@ -2,3 +2,4 @@ pyrogram==2.0.0
 requests==2.26.0
 solana==0.29.0
 python-dotenv==0.19.1
+theblockchainapi==0.0.604
