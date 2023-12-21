@@ -2,6 +2,7 @@ from solana.rpc.api import Client
 from theblockchainapi import TheBlockchainAPIResource, SolanaNetwork
 import requests
 import json
+from solana.publickey import Pubkey
 
 
 class SolEnd:
@@ -20,7 +21,8 @@ class SolEnd:
         return client
 
     def balance(self, address, client):
-        return client.get_balance(address)
+    pubkey = Pubkey(address)
+    return client.get_balance(pubkey)
 
     def price_in_usdt(self):
         link_sol = 'https://public-api.solscan.io/market/token/So11111111111111111111111111111111111111112'
@@ -32,12 +34,17 @@ class SolEnd:
         return self.addr_to_nick
 
     def get_tokens(self, address):
-        address_of_tokens = []
-        res = requests.get(f'https://api-devnet.solscan.io/account/tokens?address={address}').json()['data']
-        for tokens in res:
+    address_of_tokens = []
+    try:
+        res = requests.get(f'https://api-devnet.solscan.io/account/tokens?address={address}').json()
+        data = res.get('data', [])
+        for tokens in data:
             address_of_tokens.append(tokens['tokenAddress'])
         print(address_of_tokens)
         return address_of_tokens
+    except json.JSONDecodeError as e:
+        print(f"JSON decoding error: {e}")
+        return []
 
     def get_nft_metadata(self, nft_address):
         nft_metadata = self.BLOCKCHAIN_API_RESOURCE.get_nft_metadata(
