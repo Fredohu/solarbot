@@ -2,7 +2,7 @@ from solana.rpc.api import Client
 from theblockchainapi import TheBlockchainAPIResource, SolanaNetwork
 import requests
 import json
-from solana.publickey import Pubkey
+from solana.publickey import PublicKey
 
 
 class SolEnd:
