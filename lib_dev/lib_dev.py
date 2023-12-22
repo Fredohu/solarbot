@@ -23,7 +23,7 @@ class SolEnd:
         return client.get_balance(address)
 
     def price_in_usdt(self):
-        link_sol = 'https://solscan.io/market/token/So11111111111111111111111111111111111111112'
+        link_sol = 'https://public-api.solscan.io/market/token/So11111111111111111111111111111111111111112'
         res = requests.get(link_sol).json()
         return res["priceUsdt"]
 
@@ -33,7 +33,7 @@ class SolEnd:
 
     def get_tokens(self, address):
         address_of_tokens = []
-        res = requests.get(f'https://api.solscan.io/account/tokens?address={address}').json()['data']
+        res = requests.get(f'https://solscan.io/account/tokens?address={address}').json()['data']
         for tokens in res:
             address_of_tokens.append(tokens['tokenAddress'])
         print(address_of_tokens)
