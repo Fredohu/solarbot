@@ -64,13 +64,23 @@ def start(client, query):
 
 @App.on_message(filters.command('my_balance'))
 def raw(client, message):
-    bal = back.balance(back.addr_to_nick[message.from_user.username], back.connect())
-    new_bal = bal["result"]["value"]
-    new_bal = round(new_bal / 1000000000, 2)
-    sol_bal = round((new_bal * back.price_in_usdt()), 2)
-    print(f'{new_bal} SOL / {sol_bal} USDT')
-    message.reply(f'{new_bal} SOL = {sol_bal} USD')
-
+    try:
+        wallet_address = back.addr_to_nick.get(message.from_user.username)
+        if wallet_address:
+            balance_response = back.balance(wallet_address, back.connect())
+            if "result" in balance_response and "value" in balance_response["result"]:
+                new_bal = balance_response["result"]["value"]
+                new_bal = round(new_bal / 1000000000, 2)
+                sol_bal = round((new_bal * back.price_in_usdt()), 2)
+                print(f'{new_bal} SOL / {sol_bal} USDT')
+                message.reply(f'{new_bal} SOL = {sol_bal} USD')
+            else:
+                message.reply("Unable to fetch balance. Please try again later.")
+        else:
+            message.reply("Wallet address not found for the user.")
+    except Exception as e:
+        print(f"Error fetching balance: {e}")
+        message.reply("An error occurred while fetching your balance. Please try again later.")
 
 @App.on_message(filters.command('my_collection'))
 def drop(client, message):
