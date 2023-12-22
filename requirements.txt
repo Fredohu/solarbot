@@ -1,5 +1,5 @@
 pyrogram==2.0.106
 requests==2.27.1
 solana==0.21.0
-theblockchainapi==0.0.604
+theblockchainapi==0.0.506
 TgCrypto==1.2.5
