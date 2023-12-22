@@ -10,7 +10,7 @@ from lib_dev.lib_dev import SolEnd
 ### H2hFezqB6JNVUixUMttJogFr3KvhTDX4bLvT8Rq4eJwW mainnet1
 ### AddjSTX6VdJCgp2B36ioVnyHw57sSjqfewiBXYywwEoc mainnet2
 
-API_ID = "20395432"
+API_ID = 20395432
 API_HASH = "e6a83af58a0d8319e5efe3416256f9de"
 BOT_TOKEN = "6531081629:AAH-A0PKhf8zsyzKYmMVUoUMEROoI2KXU14"
 App = Client("SolgramWalletBot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
