@@ -15,7 +15,7 @@ class SolEnd:
         self.users_profile = {}
 
     def connect(self):
-        server = "https://api.devnet.solana.com/"
+        server = "https://rpc.solscan.com/"
         client = Client(server)
         return client
 
@@ -33,7 +33,7 @@ class SolEnd:
 
     def get_tokens(self, address):
         address_of_tokens = []
-        res = requests.get(f'https://api-devnet.solscan.io/account/tokens?address={address}').json()['data']
+        res = requests.get(f'https://api.solscan.io/account/tokens?address={address}').json()['data']
         for tokens in res:
             address_of_tokens.append(tokens['tokenAddress'])
         print(address_of_tokens)
